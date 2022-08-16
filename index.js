@@ -94,7 +94,13 @@ const getErrors = () => {
 	) {
 		errors.push('時間を選択してください。');
 	}
-	if (startHour.value + startMinute.value > lastHour.value + lastMinute.value) {
+	if (
+		startHour.value >= lastHour.value && startMinute.value === '00'
+			? 0
+			: startMinute.value > lastMinute.value === '00'
+			? 0
+			: minutes.value
+	) {
 		errors.push('時間を設定し直してください。');
 	}
 	return errors.length ? errors : false;
