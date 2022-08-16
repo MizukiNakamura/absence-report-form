@@ -6,6 +6,7 @@ submitButton.addEventListener('click', (e) => {
 	form.submit();
 });
 
+
 const months = [],
 	days = [],
 	hours = [],
