@@ -10,7 +10,7 @@ submitButton.addEventListener('click', (e) => {
 const months = [],
 	days = [],
 	hours = [],
-	minutes = [];
+	minutes = ['00'];
 
 for (let i = 1; i <= 12; i++) {
 	months.push(i);
@@ -21,7 +21,7 @@ for (let i = 1; i <= 31; i++) {
 for (let i = 9; i <= 18; i++) {
 	hours.push(i);
 }
-for (let i = 0; i <= 50; i += 10) {
+for (let i = 10; i <= 50; i += 10) {
 	minutes.push(i);
 }
 
