@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>欠席届作成フォーム</title>
+  <link rel="stylesheet" href="./reset.css">
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <h1 class="title">欠席届作成フォーム</h1>
+
+  <main>
+    <div class="inner">
+      <form id="js-form"
+        action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSf3TSfPTaRLzvZsAOI2AnHfDoHCdTfQZn8ztiyxdquaQ85djg/formResponse"
+        method="post">
+        <dl class="formList">
+          <div class="formItem">
+            <dt class="formItem__head">届け種類</dt>
+            <dd class="formItem__body">
+              <select name="entry.111127629" id="js-paperType">
+                <option value="">ーーー</option>
+                <option value="欠席">欠席</option>
+                <option value="遅刻">遅刻</option>
+                <option value="早退">早退</option>
+              </select>
+            </dd>
+          </div>
+
+          <div class="formItem">
+            <dt class="formItem__head">理由</dt>
+            <dd class="formItem__body"><input type="text" name="entry.287160027" id="js-reason"></dd>
+          </div>
+
+          <div class="formItem">
+            <dt class="formItem__head">期間</dt>
+            <div>
+              <dd class="formItem__body">
+                <select name="entry.775089439" id="js-startMonth">
+                  <option value="">---</option>
+                </select>
+              </dd>
+              <span>月</span>
+              <dd class="formItem__body">
+                <select name="entry.667066359" id="js-startDay">
+                  <option value="">---</option>
+                </select>
+              </dd>
+              <span>日</span>
+            </div>
+
+            <div>
+              <dd class="formItem__body">
+                <select name="entry.503341216" id="js-lastMonth">
+                  <option value="">---</option>
+                </select>
+              </dd>
+              <span>月</span>
+              <dd class="formItem__body">
+                <select name="entry.1202033356" id="js-lastDay">
+                  <option value="">---</option>
+                </select>
+              </dd>
+              <span>日</span>
+            </div>
+          </div>
+
+          <div class="formItem">
+            <dt class="formItem__head">時間</dt>
+            <div>
+              <dd class="formItem__body">
+                <select name="entry.580698262" id="js-startHour">
+                  <option value="">---</option>
+                </select>
+              </dd>
+              <span>：</span>
+              <dd class="formItem__body">
+                <select name="entry.1988221" id="js-startMinute">
+                  <option value="">---</option>
+                </select>
+              </dd>
+            </div>
+            <span style="margin-left: 66px; margin-bottom: 0.4rem;">〜</span>
+            <div>
+              <dd class="formItem__body">
+                <select name="entry.1956412453" id="js-lastHour">
+                  <option value="">---</option>
+                </select>
+              </dd>
+              <span>：</span>
+              <dd class="formItem__body">
+                <select name="entry.1901572141" id="js-lastMinute">
+                  <option value="">---</option>
+                </select>
+              </dd>
+            </div>
+          </div>
+        </dl>
+
+        <input type="hidden" name="entry.1839582778" id="js-date">
+
+        <div class="buttonWrapper">
+          <input id="js-confirmButton" class="button" type="button" value="確認画面へ">
+        </div>
+
+        <ul class="errorMessageList" id="js-errorMessage"></ul>
+      </form>
+    </div>
+  </main>
+
+  <div class="confirmModal" id="js-confirmModal">
+    <h2 class="modalTitle">確認画面</h2>
+    <dl class="modalList">
+      <div class="modalItem js-confirmItem">
+        <dt>届け種類</dt>
+        <dd></dd>
+      </div>
+      <div class="modalItem js-confirmItem">
+        <dt>理由</dt>
+        <dd></dd>
+      </div>
+      <div class="modalItem js-confirmItem">
+        <dt>期間</dt>
+        <dd></dd>
+      </div>
+      <div class="modalItem js-confirmItem">
+        <dt>時間</dt>
+        <dd></dd>
+      </div>
+    </dl>
+
+    <div class="buttonWrapper">
+      <input type="submit" value="送信する" id="js-submitButton" class="button button--submit">
+    </div>
+
+    <div class="buttonWrapper" style="margin-top: 5rem;">
+      <a href="" id="js-modalCloser" class="button">閉じる</a>
+    </div>
+  </div>
+
+  <div class="background" id="js-background"></div>
+
+  <script src="./index.js"></script>
+</body>
+
+</html>
