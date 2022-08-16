@@ -6,7 +6,6 @@ submitButton.addEventListener('click', (e) => {
 	form.submit();
 });
 
-
 const months = [],
 	days = [],
 	hours = [],
@@ -38,8 +37,9 @@ const lastMinute = document.getElementById('js-lastMinute');
 const date = document.getElementById('js-date');
 
 const today = new Date();
-date.value =
-	today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+date.value = `届け日： ${today.getFullYear()}年 ${
+	today.getMonth() + 1
+}月 ${today.getDate()}日`;
 console.log(date.value);
 
 const setOption = (array, element) => {
