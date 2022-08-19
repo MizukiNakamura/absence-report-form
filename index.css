@@ -3,6 +3,8 @@
 body {
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 1.2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .inner {
@@ -13,7 +15,7 @@ body {
 .title {
   font-size: 1.6rem;
   font-weight: 600;
-  margin: 1rem auto 2.8rem;
+  margin-bottom: 2.8rem;
   text-align: center;
   color: goldenrod;
 }
@@ -64,6 +66,10 @@ body {
   outline: none;
 }
 
+.formItem__body > input[type='text'].is-error {
+  border-color: #fe0100;
+}
+
 .formItem__body > select {
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -88,6 +94,10 @@ body {
   outline: none;
 }
 
+.formItem__body > select.is-error {
+  border-color: #fe0100;
+}
+
 .formItem__body + span {
   margin-left: 0.4rem;
   margin-right: 0.4rem;
@@ -105,7 +115,7 @@ body {
   background-image: none;
   border: solid 1px goldenrod;
   border-radius: 0;
-  color: inherit;
+  color: goldenrod;
   cursor: pointer;
   display: inline-block;
   font-size: 1em;
@@ -164,7 +174,7 @@ body {
   width: 90vw;
   height: 80vh;
   border: solid 1px goldenrod;
-  padding: 20px 10px;
+  padding: 4rem 2rem;
   background-color: #fff;
 }
 
@@ -185,7 +195,6 @@ body {
 
 .modalItem {
   display: flex;
-  flex-direction: column;
   margin-bottom: 2rem;
 }
 
@@ -194,12 +203,7 @@ body {
 }
 
 .modalItem > dt {
-  margin-bottom: 0.5rem;
-}
-
-.modalItem > dd {
-  margin-left: auto;
-  width: 96%;
+  margin-right: 4rem;
 }
 
 .background {

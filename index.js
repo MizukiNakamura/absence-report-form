@@ -1,150 +1,212 @@
-const form = document.getElementById('js-form');
-const submitButton = document.getElementById('js-submitButton');
+import {
+	form,
+	button_confirm,
+	button_submit,
+	select_paperType,
+	input_reason,
+	select_startMonth,
+	select_startDay,
+	select_lastMonth,
+	select_lastDay,
+	select_startHour,
+	select_startMinute,
+	select_lastHour,
+	select_lastMinute,
+	input_date,
+	errorBox,
+	confirmModal,
+	modalCloser,
+	background,
+} from './dom.js';
 
-submitButton.addEventListener('click', (e) => {
+// 送信ボタン
+button_submit.dom.addEventListener('click', (e) => {
 	e.preventDefault();
-	form.submit();
+	form.dom.submit();
 });
 
-const months = [],
-	days = [],
-	hours = [],
-	minutes = ['00'];
-
-for (let i = 1; i <= 12; i++) {
-	months.push(i);
-}
-for (let i = 1; i <= 31; i++) {
-	days.push(i);
-}
-for (let i = 9; i <= 18; i++) {
-	hours.push(i);
-}
-for (let i = 10; i <= 50; i += 10) {
-	minutes.push(i);
-}
-
-const paperType = document.getElementById('js-paperType');
-const reason = document.getElementById('js-reason');
-const startMonth = document.getElementById('js-startMonth');
-const startDay = document.getElementById('js-startDay');
-const lastMonth = document.getElementById('js-lastMonth');
-const lastDay = document.getElementById('js-lastDay');
-const startHour = document.getElementById('js-startHour');
-const startMinute = document.getElementById('js-startMinute');
-const lastHour = document.getElementById('js-lastHour');
-const lastMinute = document.getElementById('js-lastMinute');
-const date = document.getElementById('js-date');
-
+// 日付取得
 const today = new Date();
-date.value = `届け日： ${today.getFullYear()}年 ${
-	today.getMonth() + 1
-}月 ${today.getDate()}日`;
-console.log(date.value);
+input_date.setValue(
+	`届け日： ${today.getFullYear()}年 ${
+		today.getMonth() + 1
+	}月 ${today.getDate()}日`
+);
 
-const setOption = (array, element) => {
-	array.forEach((value) => {
-		const option = document.createElement('option');
-		option.value = value;
-		option.textContent = value;
-		element.appendChild(option);
-	});
+const message = {
+	paperType: '届け種類を記入してください。',
+	reason: '理由を記入してください。',
+	span: '期間を選択してください。',
+	reselect_date: '期間の設定が間違っています。',
+	time: '時間を選択してください。',
+	reselect_time: '時間の設定が間違っています。',
 };
-
-setOption(months, startMonth);
-setOption(months, lastMonth);
-setOption(days, startDay);
-setOption(days, lastDay);
-setOption(hours, startHour);
-setOption(hours, lastHour);
-setOption(minutes, startMinute);
-setOption(minutes, lastMinute);
-
-const errorMessage = document.getElementById('js-errorMessage');
-const confirmButton = document.getElementById('js-confirmButton');
-const confirmModal = document.getElementById('js-confirmModal');
-const background = document.getElementById('js-background');
-const modalCloser = document.getElementById('js-modalCloser');
-const confirmItems = confirmModal.querySelectorAll('.js-confirmItem');
 
 const getErrors = () => {
+	const startDate = new Date(
+		2022,
+		select_startMonth.getValue(),
+		select_startDay.getValue()
+	);
+	const lastDate = new Date(
+		2022,
+		select_lastMonth.getValue(),
+		select_lastDay.getValue()
+	);
+	const startTime = new Date(
+		2022,
+		1,
+		1,
+		select_startHour.getValue(),
+		Number(select_startMinute.getValue())
+	);
+	const lastTime = new Date(
+		2022,
+		1,
+		1,
+		select_lastHour.getValue(),
+		Number(select_lastMinute.getValue())
+	);
 	const errors = [];
-	if (paperType.value === '') {
-		errors.push('届け種類を記入してください。');
+	const errorItems = [];
+	// 届け出種類
+	if (select_paperType.getValue() === '') {
+		errors.push(message.paperType);
+		errorItems.push(select_paperType);
 	}
-	if (reason.value === '') {
-		errors.push('理由を記入してください。');
+	// 理由
+	if (input_reason.getValue() === '') {
+		errors.push(message.reason);
+		errorItems.push(input_reason);
 	}
+	// 期間
 	if (
-		(startMonth.value === '') |
-		(startDay.value === '') |
-		(lastMonth.value === '') |
-		(lastDay.value === '')
+		(select_startMonth.getValue() === '') |
+		(select_startDay.getValue() === '') |
+		(select_lastMonth.getValue() === '') |
+		(select_lastDay.getValue() === '')
 	) {
-		errors.push('期間を選択してください。');
+		errors.push(message.span);
+		errorItems.push(
+			select_startMonth,
+			select_startDay,
+			select_lastMonth,
+			select_lastDay
+		);
+	} else if (startDate > lastDate) {
+		errors.push(message.reselect_date);
+		errorItems.push(
+			select_startMonth,
+			select_startDay,
+			select_lastMonth,
+			select_lastDay
+		);
 	}
-	if (startMonth.value + startDay.value > lastMonth.value + lastDay.value) {
-		errors.push('期間を設定し直してください。');
-	}
+	// 時間
 	if (
-		(startHour.value === '') |
-		(startMinute.value === '') |
-		(lastHour.value === '') |
-		(lastMinute.value === '')
+		(select_startHour.getValue() === '') |
+		(select_startMinute.getValue() === '') |
+		(select_lastHour.getValue() === '') |
+		(select_lastMinute.getValue() === '')
 	) {
-		errors.push('時間を選択してください。');
+		errors.push(message.time);
+		errorItems.push(
+			select_startHour,
+			select_startMinute,
+			select_lastHour,
+			select_lastMinute
+		);
+	} else if (startTime > lastTime) {
+		errors.push(message.reselect_time);
+		errorItems.push(
+			select_startHour,
+			select_startMinute,
+			select_lastHour,
+			select_lastMinute
+		);
 	}
-	if (
-		startHour.value >= lastHour.value && startMinute.value === '00'
-			? 0
-			: startMinute.value > lastMinute.value === '00'
-			? 0
-			: minutes.value
-	) {
-		errors.push('時間を設定し直してください。');
-	}
-	return errors.length ? errors : false;
+	const errorInfo = {
+		errors: errors,
+		errorItems: errorItems,
+	};
+	return errors.length === 0 ? false : errorInfo;
 };
 
-confirmButton.addEventListener('click', (e) => {
+// 確認画面へ
+button_confirm.dom.addEventListener('click', (e) => {
 	e.preventDefault();
-	errorMessage.classList.remove('is-active');
-	errorMessage.innerHTML = '';
+	errorBox.removeClass('is-active');
+	errorBox.dom.innerHTML = '';
+	form.dom.querySelectorAll('.is-error').forEach((errorItem) => {
+		errorItem.classList.remove('is-error');
+	});
 	if (getErrors()) {
-		errorMessage.classList.add('is-active');
-		const messages = getErrors();
-		messages.forEach((message) => {
+		errorBox.addClass('is-active');
+		const errors = getErrors().errors;
+		const errorItems = getErrors().errorItems;
+		console.log(errorItems);
+		errors.forEach((error) => {
 			const li = document.createElement('li');
-			li.textContent = message;
+			li.textContent = error;
 			li.classList.add('errorMessageItem');
-			errorMessage.appendChild(li);
+			errorBox.dom.appendChild(li);
+		});
+		errorItems.forEach((errorItem) => {
+			errorItem.addClass('is-error');
 		});
 	} else {
-		let i = 0;
-		const confirmValues = [
-			paperType.value,
-			reason.value,
-			startMonth.value === lastMonth.value && startDay.value === lastDay.value
-				? `${startMonth.value}月${startDay.value}日`
-				: `${startMonth.value}月${startDay.value}日 〜 ${lastMonth.value}月${lastDay.value}日`,
-			`${startHour.value}：${startMinute.value} 〜 ${lastHour.value}：${lastMinute.value}`,
-		];
-		confirmItems.forEach((confirmItem) => {
-			confirmItem.querySelector('dd').textContent = confirmValues[i];
-			i++;
-		});
-		confirmModal.classList.add('is-active');
-		background.classList.add('is-active');
+		const value = {
+			paperType: select_paperType.getValue(),
+			reason: input_reason.getValue(),
+			startMonth: select_startMonth.getValue(),
+			lastMonth: select_lastMonth.getValue(),
+			startDay: select_startDay.getValue(),
+			lastDay: select_lastDay.getValue(),
+			startHour: select_startHour.getValue(),
+			lastHour: select_lastHour.getValue(),
+			startMinute: select_startMinute.getValue(),
+			lastMinute: select_lastMinute.getValue(),
+		};
+		const listItems = confirmModal.dom.querySelectorAll('.js-confirmItem');
+		for (let [i, listItem] of listItems.entries()) {
+			switch (i) {
+				case 0:
+					listItem.querySelector('dd').textContent = value.paperType;
+					break;
+				case 1:
+					listItem.querySelector('dd').textContent = value.reason;
+					break;
+				case 2:
+					const startDate = `${value.startMonth}月${value.startDay}日`;
+					const lastDate = `${value.lastMonth}月${value.lastDay}日`;
+					if (startDate === lastDate) {
+						listItem.querySelector('dd').textContent = startDate;
+					} else {
+						listItem.querySelector(
+							'dd'
+						).textContent = `${startDate} 〜 ${lastDate}`;
+					}
+					break;
+				case 3:
+					const startTime = `${value.startHour}:${value.startMinute}`;
+					const lastTime = `${value.lastHour}:${value.lastMinute}`;
+					listItem.querySelector(
+						'dd'
+					).textContent = `${startTime} 〜 ${lastTime}`;
+					break;
+			}
+		}
+		confirmModal.addClass('is-active');
+		background.addClass('is-active');
 	}
 });
-
-background.addEventListener('click', (e) => {
+background.dom.addEventListener('click', (e) => {
 	e.preventDefault();
-	confirmModal.classList.remove('is-active');
-	background.classList.remove('is-active');
+	confirmModal.removeClass('is-active');
+	background.removeClass('is-active');
 });
-modalCloser.addEventListener('click', (e) => {
+modalCloser.dom.addEventListener('click', (e) => {
 	e.preventDefault();
-	confirmModal.classList.remove('is-active');
-	background.classList.remove('is-active');
+	confirmModal.removeClass('is-active');
+	background.removeClass('is-active');
 });

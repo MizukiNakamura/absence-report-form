@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>欠席届作成フォーム</title>
   <link rel="stylesheet" href="./reset.css">
-  <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./index.css?ver=0">
 </head>
 
 <body>
@@ -52,7 +52,7 @@
               </dd>
               <span>日</span>
             </div>
-
+            <span style="margin-left: 66px; margin-bottom: 0.4rem;">〜</span>
             <div>
               <dd class="formItem__body">
                 <select name="entry.503341216" id="js-lastMonth">
@@ -108,7 +108,7 @@
           <input id="js-confirmButton" class="button" type="button" value="確認画面へ">
         </div>
 
-        <ul class="errorMessageList" id="js-errorMessage"></ul>
+        <ul class="errorMessageList" id="js-errorBox"></ul>
       </form>
     </div>
   </main>
@@ -138,14 +138,14 @@
       <input type="button" value="送信する" id="js-submitButton" class="button button--submit">
     </div>
 
-    <div class="buttonWrapper" style="margin-top: 5rem;">
+    <div class="buttonWrapper" style="margin-top: 2rem;">
       <a href="" id="js-modalCloser" class="button">閉じる</a>
     </div>
   </div>
 
   <div class="background" id="js-background"></div>
 
-  <script src="./index.js"></script>
+  <script type="module" src="./index.js?ver=0"></script>
 </body>
 
 </html>
