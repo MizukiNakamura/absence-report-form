@@ -15,11 +15,21 @@ body {
 }
 
 .title {
-	font-size: 1.6rem;
-	font-weight: 600;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	& > span {
+		font-size: 1.6rem;
+		font-weight: 600;
+		color: goldenrod;
+		margin-right: .5rem;
+	}
+	& > img {
+		width: 1.6rem;
+	}
 	margin-bottom: 2.8rem;
 	text-align: center;
-	color: goldenrod;
 }
 
 .formList {

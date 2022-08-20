@@ -144,7 +144,6 @@ button_confirm.dom.addEventListener('click', (e) => {
 		errorBox.addClass('is-active');
 		const errors = getErrors().errors;
 		const errorItems = getErrors().errorItems;
-		console.log(errorItems);
 		errors.forEach((error) => {
 			const li = document.createElement('li');
 			li.textContent = error;

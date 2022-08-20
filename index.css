@@ -13,11 +13,22 @@ body {
 }
 
 .title {
-  font-size: 1.6rem;
-  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 2.8rem;
   text-align: center;
+}
+
+.title > span {
+  font-size: 1.6rem;
+  font-weight: 600;
   color: goldenrod;
+  margin-right: .5rem;
+}
+
+.title > img {
+  width: 1.6rem;
 }
 
 .formItem {
