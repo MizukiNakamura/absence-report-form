@@ -9,7 +9,7 @@
   <meta name="description"
     content="フォームに回答すると、回答内容を反映したExcelファイルをメール添付して送信します。受信したメールのファイルを確認して、転送するだけで欠席届を提出することができます。">
   <link rel="stylesheet" href="./reset.css">
-  <link rel="stylesheet" href="./index.css?ver=0">
+  <link rel="stylesheet" href="./index.css?ver=1">
 </head>
 
 <body>
@@ -54,7 +54,7 @@
               </dd>
               <span>日</span>
             </div>
-            <span style="margin-left: 66px; margin-bottom: 0.4rem;">〜</span>
+            <span class="ml_4rem mb_05rem">〜</span>
             <div>
               <dd class="formItem__body">
                 <select name="entry.503341216" id="js-lastMonth">
@@ -86,7 +86,7 @@
                 </select>
               </dd>
             </div>
-            <span style="margin-left: 66px; margin-bottom: 0.4rem;">〜</span>
+            <span class="ml_4rem mb_05rem">〜</span>
             <div>
               <dd class="formItem__body">
                 <select name="entry.1956412453" id="js-lastHour">
@@ -104,13 +104,13 @@
         </dl>
 
         <input type="hidden" name="entry.1839582778" id="js-date">
-        <input type="text" name="dummy" style="display: none;">
-
-        <div class="buttonWrapper">
-          <input id="js-confirmButton" class="button" type="button" value="確認画面へ">
-        </div>
+        <input type="text" name="dummy" class="display_none">
 
         <ul class="errorMessageList" id="js-errorBox"></ul>
+
+        <div class="buttonWrapper mt_1rem">
+          <input id="js-confirmButton" class="button" type="button" value="確認画面へ">
+        </div>
       </form>
     </div>
   </main>
@@ -140,14 +140,14 @@
       <input type="button" value="送信する" id="js-submitButton" class="button button--submit">
     </div>
 
-    <div class="buttonWrapper" style="margin-top: 2rem;">
-      <a href="" id="js-modalCloser" class="button">閉じる</a>
+    <div class="buttonWrapper mt_1rem">
+      <a href="" id="js-modalCloser" class="button">戻る</a>
     </div>
   </div>
 
   <div class="background" id="js-background"></div>
 
-  <script type="module" src="./index.js?ver=0"></script>
+  <script type="module" src="./index.js?ver=1"></script>
 </body>
 
 </html>

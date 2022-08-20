@@ -23,7 +23,6 @@ body {
 }
 
 .formList {
-	margin-bottom: 2rem;
 }
 
 .formItem {
@@ -38,6 +37,9 @@ body {
 		display: flex;
 		align-items: center;
 		margin-bottom: 0.4em;
+		&:last-of-type {
+			margin-bottom: 0;
+		}
 	}
 
 	&__head {
@@ -135,7 +137,7 @@ body {
 
 .errorMessageList {
 	display: none;
-	margin-top: 2rem;
+	margin-top: 1rem;
 	border: solid 1px #fe0100;
 	padding: 0.5em;
 	&.is-active {
@@ -190,8 +192,6 @@ body {
 		margin-right: 4rem;
 	}
 	& > dd {
-		// margin-left: auto;
-		// width: 96%;
 	}
 }
 
@@ -207,4 +207,20 @@ body {
 	&.is-active {
 		display: block;
 	}
+}
+
+.display_none {
+	display: none !important;
+}
+
+.mt_1rem {
+	margin-top: 1rem !important;
+}
+
+.mb_05rem {
+	margin-bottom: 0.5rem !important;
+}
+
+.ml_4rem {
+	margin-left: 4rem !important;
 }
